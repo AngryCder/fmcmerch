@@ -46,7 +46,11 @@ export class AppComponent {
 	w:string = "xs";
 	d:string="xs";
 	ord:orders;
+	cartbadge:number;
+	dcb :number = 0;
+	wcb : number= 0;
 	log_sub:any;
+	sizes:string[]=["xs","s","m","l","xl","xxl","xxxl"];
 
 	cartsw :boolean = true;
 
@@ -61,7 +65,10 @@ export class AppComponent {
       this.storage.observe("user").subscribe((user)=>{
       this.user = user;
       this.loggedIn=(user != null);
-    })
+    });
+      this.storage.observe("no").subscribe((num:number)=>{
+      	this.cartbadge=num;
+      })
 
       if(this.storage.retrieve('orders') == null){
       	      this.ord = {dark:{	xs:0,
@@ -79,10 +86,13 @@ export class AppComponent {
 	xxl:0,
 	xxxl:0}}
 this.storage.store("orders",this.ord);
+this.storage.store("no",0);
       }
 	}
 	ngOnInit():void{
  this.ord = this.storage.retrieve('orders');
+   this.cartbadge = this.storage.retrieve('no');
+   	this.total();
  if(!this.loggedIn){
  this.pop_notice();
  }
@@ -116,7 +126,8 @@ this.storage.store("orders",this.ord);
 		 		else if(res["message"] == "success"){
 		 			this.storage.store("user",user);
 		 		}
-		 	})
+		 	});
+		 	this.storage.store("user",user);
 		 });
 
 	}
@@ -125,6 +136,7 @@ this.storage.store("orders",this.ord);
 		this.authService.signOut();
 		this.storage.clear("user");
 		this.storage.clear("orders");
+		this.storage.clear("no");
 		this.log_sub.unsubscribe();
 		this.http.get("https://fmc-weekend-shirt.herokuapp.com/google/logout",{withCredentials:true}).subscribe((res)=>{console.log(res)});
 		window.location.reload();
@@ -133,31 +145,60 @@ this.storage.store("orders",this.ord);
 	add(color:string){
 		if(color=="dark"){
 		this.ord[color][this.d]=this.ord[color][this.d]+1;
+		this.dcb = this.dcb + 1;
 		this.storage.store("orders",this.ord)
+		this.storage.store("no",this.dcb+this.wcb);
 		//this.wc=this.ord[color][s];
 		}
 		if(color=="white"){
 		this.ord[color][this.w]=this.ord[color][this.w]+1;
+		this.wcb = this.wcb + 1;
 		this.storage.store("orders",this.ord)
+		this.storage.store("no",this.dcb+this.wcb);
 		//this.wc=this.ord[color][s];
 		}
 		console.log(this.w,this.d)
 	}
     re(color:string){
+
 		if(color=="dark"){
+		if(this.ord[color][this.d]!=0){
+			this.dcb = Math.max(this.dcb - 1,0);
+			this.storage.store("no",this.dcb+this.wcb);
+		}
 		this.ord[color][this.d]=Math.max(this.ord[color][this.d]-1,0);
 		this.storage.store("orders",this.ord)
-		//this.wc=this.ord[color][s];
+				//this.wc=this.ord[color][s];
 		}
 		if(color=="white"){
+		if(this.ord[color][this.w]!=0){
+			this.wcb = Math.max(this.wcb - 1,0);
+			this.storage.store("no",this.dcb+this.wcb);
+		}
 		this.ord[color][this.w]=Math.max(this.ord[color][this.d]-1,0);
 		this.storage.store("orders",this.ord)
+		this.storage.store("no",this.dcb+this.wcb);
 		//this.wc=this.ord[color][s];
 		}
+		console.log(this.w,this.d)
+			}
+
+
+	total():void{
+		let temp = 0;
+		for(let size of this.sizes){
+			this.dcb = this.dcb + this.ord["dark"][size] ;
+			this.wcb = this.wcb + this.ord["white"][size]
+		}
+		this.storage.store("no",this.dcb+this.wcb);
 	}
 	buy():void{
+		if(this.cartbadge==0){
+			this.openSnackBar("Please add something to the cart","hide");
+		}
+		else{
 		const dialogRef = this.dialog.open(ProfileComponent,{width:'100%',height:"100%",maxWidth:"600px"});
-
+            }
 	}
 
 	shift(s:string,color:string){

@@ -1,8 +1,10 @@
 <router-outlet></router-outlet>
 <mat-toolbar style="position: fixed;z-index: 150;">   <img src="./../assets/logo.png" style="height:100%;"   ><span class="example-spacer"></span>
 	<button mat-button *ngIf="!loggedIn" (click)="login()" color>Login</button>
-  <button mat-raised-button *ngIf="loggedIn" color="warn" (click)="signOut()">Sign Out</button>&nbsp;
+  <button mat-raised-button *ngIf="loggedIn" color="warn" (click)="signOut()">Sign Out</button>&nbsp;&nbsp;&nbsp;
 	<button mat-raised-button *ngIf="loggedIn" color="accent" (click)="buy()" >Buy</button>
+   <button mat-button matBadge="{{ cartbadge }}" matBadgeColor="warn" color="basic" *ngIf="loggedIn" (click)="showCart()"><mat-icon>shopping_cart</mat-icon></button>
+
 </mat-toolbar>
 <div class="main">
    <img src="./../assets/adv.jpeg" class="adv">
@@ -10,9 +12,9 @@
 			<div class="place">
 		<mat-toolbar style="border-top-left-radius: 25px;
     border-top-right-radius: 25px;">Inception<span class="example-spacer"></span> 
-     <button mat-mini-fab *ngIf="loggedIn"  (click)="add('dark')" ><mat-icon>add</mat-icon></button>
-    <button mat-button *ngIf="loggedIn" (click)="showCart()">Quantity {{ord['dark'][d]}}</button>
-    <button mat-mini-fab *ngIf="loggedIn" (click)="re('dark')" ><mat-icon>remove</mat-icon></button>
+     <button mat-mini-fab color="basic" *ngIf="loggedIn"  (click)="re('dark')" ><mat-icon>remove</mat-icon></button>
+    <button mat-button *ngIf="loggedIn" (click)="showCart()">Quantity: {{ord['dark'][d]}}</button>
+    <button mat-mini-fab color="basic"  *ngIf="loggedIn" (click)="add('dark')" ><mat-icon>add</mat-icon></button>
   </mat-toolbar>
 		<div class="hold">
 		<img src="./../assets/black1.png" class="shirt">
@@ -41,9 +43,9 @@
 			<div class="place">
 		<mat-toolbar style="border-top-left-radius: 25px;
     border-top-right-radius: 25px;">Snorlax<span class="example-spacer"></span>
-    <button mat-mini-fab *ngIf="loggedIn"  (click)="add('white')" ><mat-icon>add</mat-icon></button>
-    <button mat-button  *ngIf="loggedIn" (click)="showCart()">Quantity {{ord['white'][w]}}</button>
-    <button mat-mini-fab *ngIf="loggedIn" (click)="re('white')"><mat-icon>remove</mat-icon></button>
+    <button mat-mini-fab color="basic" *ngIf="loggedIn"  (click)="re('white')" ><mat-icon>remove</mat-icon></button>
+    <button mat-button  *ngIf="loggedIn" (click)="showCart()">Quantity: {{ord['white'][w]}}</button>
+    <button mat-mini-fab color="basic" *ngIf="loggedIn" (click)="add('white')"><mat-icon>add</mat-icon></button>
   </mat-toolbar>
 		<div class="hold">
 		<img src="./../assets/white1.png" class="shirt">
@@ -94,7 +96,7 @@
   <div class="car2" (click)="pop_up('tac')">
     <div class="title3">Terms and conditions</div>
   </div>
-   <div class="car2" (click)="pop_up('tac')">
+   <div class="car2" (click)="pop_up('pp')">
     <div class="title3">Privacy Policy</div>
   </div>
    <div class="car2" (click)="pop_up('ref')">

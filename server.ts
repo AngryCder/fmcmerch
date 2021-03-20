@@ -7,6 +7,7 @@ import { join } from 'path';
 const domino = require('domino');
 const fs = require('fs');
 const path = require('path');
+const compression = require('compression')
 const template = fs
   .readFileSync(path.join( join(process.cwd(), 'dist/fmc/browser') , 'index.html'))
   .toString();
@@ -26,12 +27,24 @@ import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 
+function shouldCompress (req, res) {
+  if (req.headers['x-no-compression']) {
+    // don't compress responses with this request header
+    return false
+  }
+
+  // fallback to standard filter function
+  return compression.filter(req, res)
+}
+
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
+
   const server = express();
   const distFolder = join(process.cwd(), 'dist/fmc/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
 
+  server.use(compression({ filter: shouldCompress }))
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
   server.engine('html', ngExpressEngine({
     bootstrap: AppServerModule,
