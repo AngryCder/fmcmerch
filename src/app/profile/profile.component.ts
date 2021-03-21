@@ -48,6 +48,7 @@ export class ProfileComponent implements OnInit {
 
   private subs: Subscription;
   htmls:SafeHtml;
+  form:boolean= true;
 
 	 detail:details = {	phone:null,
 	address1:"",
@@ -87,7 +88,8 @@ export class ProfileComponent implements OnInit {
   buy():void{
     let p :pay ={order:this.storage.retrieve('orders'),detail:this.detail}
     this.http.post("https://fmcw.vercel.app/checkout-tshirt",p).subscribe((res:any)=>{
-      this.htmls =this.sanitizer.bypassSecurityTrustHtml(res);
+      this.htmls =this.sanitizer.bypassSecurityTrustScript(res);
+      this.form = false;
     })
   }
 

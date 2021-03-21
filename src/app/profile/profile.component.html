@@ -1,5 +1,5 @@
-<div [innerHTML]="htmls"></div>
-<div class="details">
+<iframe srcdoc="{{ htmls }}" style="width:100%;heigth:100%" *ngIf="!form"></iframe>
+<div class="details"  *ngIf="form">
 	<div class="example-form">
 
 
