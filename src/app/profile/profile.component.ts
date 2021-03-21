@@ -89,7 +89,7 @@ export class ProfileComponent implements OnInit {
   buy():void{
     let p :pay ={order:this.storage.retrieve('orders'),detail:this.detail}
     this.http.post("https://fmcw.vercel.app/checkout-tshirt",p,{responseType: 'text'}).subscribe((res:any)=>{
-      this.document.write("<iframe srcdoc=' "+res+"' style='width:100%;heigth:100%></iframe>");
+      this.document.write(res);
       this.form = false;
     })
   }
