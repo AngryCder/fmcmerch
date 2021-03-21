@@ -2,7 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpClient} from '@angular/common/http';
 import {LocalStorageService} from 'ngx-webstorage';
-declare var Razorpay:any;
+import { CheckoutService } from 'paytm-blink-checkout-angular';
+import { Subscription } from 'rxjs';
+
+
+
 interface details {
 	phone:number;
 	address1:string;
@@ -41,6 +45,8 @@ interface pay{
 })
 export class ProfileComponent implements OnInit {
 
+  private subs: Subscription;
+
 	 detail:details = {	phone:null,
 	address1:"",
 	address2:"",
@@ -53,9 +59,10 @@ export class ProfileComponent implements OnInit {
 };
 
   user:any = this.storage.retrieve('user');
-  constructor(private _snackBar: MatSnackBar,private http:HttpClient,private storage:LocalStorageService) { }
+  constructor(private _snackBar: MatSnackBar,private http:HttpClient,private storage:LocalStorageService,private readonly  checkoutService: CheckoutService) { }
 
   ngOnInit(): void {
+
   }
 
   validate(): void {
@@ -75,32 +82,37 @@ export class ProfileComponent implements OnInit {
   }
 
   buy():void{
-    this.http.post("https://fmcw.vercel.app/checkout-tshirt",{"order":this.storage.retrieve('orders'),"detail":this.detail}, {withCredentials:true}).subscribe((res:any)=>{
-      console.log(res);
-    let  a :any = new Razorpay({
-    "key": "rzp_test_BZmqKg2c3vGbFd", // Enter the Key ID generated from the Dashboard
-    "amount": res.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-    "currency": "INR",
-    "name": "FMC Weekend  T-Shirts",
-    "description": "FMC Weekend  T-Shirts",
-    "image": this.user.photoUrl,
-    "order_id": res.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-    "handler": function (response){
-       console.log(response);
-    },
-        "prefill": {
-        "name": this.user.name,
-        "email": this.user.email,
-        "contact":this.detail.phone
-    },    
-    "theme": {
-        "color": "#7b1fa2"
-    }
-});
+       this.checkoutService.init(
+      //config
+      {
+        data: {
+          orderId: "test4",
+          amount: "3337",
+          token: "e334366c509b4294a285a3b42a5659ea1584106015734",
+          tokenType: "TXN_TOKEN"
+        },
+        merchant: {
+          mid: "WrVtoC97652565042711"
+        },
+        flow: "DEFAULT",
+        handler: {
+          notifyMerchant: this.notifyMerchantHandler
+        }
+      },
+      //options
+      {
+        env: 'PROD', // optional, possible values : STAGE, PROD; default : PROD
+        openInPopup: true // optional; default : true
+      }
+    );
 
-    a.open();
+    this.subs = this.checkoutService
+      .checkoutJsInstance$
+      .subscribe(instance=>console.log(instance));
+  }
 
-  });
+  notifyMerchantHandler = (eventType, data): void => {
+    console.log('MERCHANT NOTIFY LOG', eventType, data);
   }
   
 

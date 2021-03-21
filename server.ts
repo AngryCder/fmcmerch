@@ -44,6 +44,14 @@ export function app(): express.Express {
   const distFolder = join(process.cwd(), 'dist/fmc/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html')) ? 'index.original.html' : 'index';
 
+  server.use((req, res, next) => {
+    res.removeHeader("X-Accept-Language");
+    res.setHeader('Access-Control-Allow-Origin', "*");
+    res.setHeader('Access-Control-Allow-Headers', "Origin, X-Request-With, Content-Type, Accept, Authorization");
+    res.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, PUT, DELETE, OPTIONS");
+    next();
+});
+
   server.use(compression({ filter: shouldCompress }))
   // Our Universal express-engine (found @ https://github.com/angular/universal/tree/master/modules/express-engine)
   server.engine('html', ngExpressEngine({

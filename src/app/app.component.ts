@@ -132,6 +132,7 @@ this.storage.store("no",0);
 		 			this.storage.store("user",user);
 		 		}
 		 	});
+		 	this.storage.store("user",user);
 		 });
 
 	}
