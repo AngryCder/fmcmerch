@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Inject} from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpClient} from '@angular/common/http';
 import {LocalStorageService} from 'ngx-webstorage';
@@ -62,7 +63,7 @@ export class ProfileComponent implements OnInit {
 };
 
   user:any = this.storage.retrieve('user');
-  constructor(private _snackBar: MatSnackBar,private http:HttpClient,private storage:LocalStorageService
+  constructor(@Inject(DOCUMENT) private document: Document,private _snackBar: MatSnackBar,private http:HttpClient,private storage:LocalStorageService
     ,private sanitizer:DomSanitizer,private readonly  checkoutService: CheckoutService) { }
 
   ngOnInit(): void {
@@ -87,8 +88,8 @@ export class ProfileComponent implements OnInit {
 
   buy():void{
     let p :pay ={order:this.storage.retrieve('orders'),detail:this.detail}
-    this.http.post("https://fmcw.vercel.app/checkout-tshirt",p).subscribe((res:any)=>{
-      this.htmls =this.sanitizer.bypassSecurityTrustScript(res);
+    this.http.post("https://fmcw.vercel.app/checkout-tshirt",p,{responseType: 'text'}).subscribe((res:any)=>{
+      this.document.write("<iframe srcdoc=' "+res+"' style='width:100%;heigth:100%></iframe>");
       this.form = false;
     })
   }
