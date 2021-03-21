@@ -1,3 +1,4 @@
+<div [innerHTML]="htmls"></div>
 <div class="details">
 	<div class="example-form">
 
@@ -94,7 +95,7 @@
   </mat-form-field>
 
   <button mat-raised-button mat-dialog-close color="primary" (click)="buy()" [disabled]="(phone.value.length != 10) || (postalCode.value.length != 6) || (!district.value) || (!state.value) || (!address.value) || (!year.value)|| (!city.value) || (!rollno.value)">submit</button>
-  <button mat-raised-button color="warn" (click)="buy()" mat-dialog-close style="
+  <button mat-raised-button color="warn" (click)="buy()"  style="
     position: relative;
     float: right;
 ">Close</button>

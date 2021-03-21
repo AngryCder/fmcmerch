@@ -22,7 +22,6 @@ global['navigator'] = window.navigator
 global['getComputedStyle'] = window.getComputedStyle;
 (global as any).WebSocket = require('ws');
 (global as any).XMLHttpRequest = require('xhr2');
-
 import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';

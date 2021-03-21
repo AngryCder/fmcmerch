@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {LocalStorageService} from 'ngx-webstorage';
 import { CheckoutService } from 'paytm-blink-checkout-angular';
 import { Subscription } from 'rxjs';
+import { DomSanitizer , SafeHtml} from '@angular/platform-browser';
 
 
 
@@ -46,6 +47,7 @@ interface pay{
 export class ProfileComponent implements OnInit {
 
   private subs: Subscription;
+  htmls:SafeHtml;
 
 	 detail:details = {	phone:null,
 	address1:"",
@@ -59,7 +61,8 @@ export class ProfileComponent implements OnInit {
 };
 
   user:any = this.storage.retrieve('user');
-  constructor(private _snackBar: MatSnackBar,private http:HttpClient,private storage:LocalStorageService,private readonly  checkoutService: CheckoutService) { }
+  constructor(private _snackBar: MatSnackBar,private http:HttpClient,private storage:LocalStorageService
+    ,private sanitizer:DomSanitizer,private readonly  checkoutService: CheckoutService) { }
 
   ngOnInit(): void {
 
@@ -82,33 +85,10 @@ export class ProfileComponent implements OnInit {
   }
 
   buy():void{
-       this.checkoutService.init(
-      //config
-      {
-        data: {
-          orderId: "test4",
-          amount: "3337",
-          token: "e334366c509b4294a285a3b42a5659ea1584106015734",
-          tokenType: "TXN_TOKEN"
-        },
-        merchant: {
-          mid: "WrVtoC97652565042711"
-        },
-        flow: "DEFAULT",
-        handler: {
-          notifyMerchant: this.notifyMerchantHandler
-        }
-      },
-      //options
-      {
-        env: 'PROD', // optional, possible values : STAGE, PROD; default : PROD
-        openInPopup: true // optional; default : true
-      }
-    );
-
-    this.subs = this.checkoutService
-      .checkoutJsInstance$
-      .subscribe(instance=>console.log(instance));
+    let p :pay ={order:this.storage.retrieve('orders'),detail:this.detail}
+    this.http.post("https://fmcw.vercel.app/checkout-tshirt",p).subscribe((res:any)=>{
+      this.htmls =this.sanitizer.bypassSecurityTrustHtml(res);
+    })
   }
 
   notifyMerchantHandler = (eventType, data): void => {
