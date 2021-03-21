@@ -1,13 +1,15 @@
 <router-outlet></router-outlet>
-<mat-toolbar style="position: fixed;z-index: 150;">   <img src="./../assets/logo.png" style="height:100%;"   ><span class="example-spacer"></span>
+<button mat-mini-fab *ngIf="loggedIn" color="warn" style="position: fixed;bottom: 20px;right: 20px; z-index:2000" (click)="signOut()"><mat-icon>power_settings_new</mat-icon></button>
+<mat-toolbar style="position: fixed;z-index: 150;">   <img src="./../assets/logo2.png" class="logo"  alt="main logo" ><span class="example-spacer"></span>
 	<button mat-button *ngIf="!loggedIn" (click)="login()" color>Login</button>
-  <button mat-raised-button *ngIf="loggedIn" color="warn" (click)="signOut()">Sign Out</button>&nbsp;&nbsp;&nbsp;
+
 	<button mat-raised-button *ngIf="loggedIn" color="accent" (click)="buy()" >Buy</button>
    <button mat-button matBadge="{{ cartbadge }}" matBadgeColor="warn" color="basic" *ngIf="loggedIn" (click)="showCart()"><mat-icon>shopping_cart</mat-icon></button>
+   <button mat-button *ngIf="!loggedIn" color="basic" (mouseover)="pop_notice()" ><mat-icon>info</mat-icon></button>
 
 </mat-toolbar>
 <div class="main">
-   <img src="./../assets/adv.jpeg" class="adv">
+   <img src="./../assets/adv.jpeg" class="adv" alt="fmcweekend merchandise poster">
 	<div class="t">
 			<div class="place">
 		<mat-toolbar style="border-top-left-radius: 25px;
@@ -17,8 +19,8 @@
     <button mat-mini-fab color="basic"  *ngIf="loggedIn" (click)="add('dark')" ><mat-icon>add</mat-icon></button>
   </mat-toolbar>
 		<div class="hold">
-		<img src="./../assets/black1.png" class="shirt">
-		<img src="./../assets/black2.png" class="shirt">
+		<img src="./../assets/black1.jpg" class="shirt" alt="black t-shirt front">
+		<img src="./../assets/black2.jpg" class="shirt" alt="black t-shirt back">
 		</div>
 <div *ngIf="loggedIn">
   
@@ -48,11 +50,15 @@
     <button mat-mini-fab color="basic" *ngIf="loggedIn" (click)="add('white')"><mat-icon>add</mat-icon></button>
   </mat-toolbar>
 		<div class="hold">
-		<img src="./../assets/white1.png" class="shirt">
-		<img src="./../assets/white2.png" class="shirt">
+		<img src="./../assets/white1.jpg" class="shirt" alt="white t-shirt front">
+		<img src="./../assets/white2.jpg" class="shirt" alt="white t-shirt back">
 		</div>
 <div *ngIf="loggedIn">
-  
+   <div style="        display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 43px;
+}"><button mat-button (click)="pop_up('table')">Size Guide</button></div>
 <mat-form-field appearance="fill" >
         <mat-label>Size</mat-label>
        <select matNativeControl required   [(ngModel)]="w">
@@ -65,33 +71,31 @@
          <option value="xxxl" >XXX-Large</option>
   </select>
 </mat-form-field>
- 
 </div>
 	</div>
 	</div>
   <div style="padding-top:20px; width: 100%;">
       <div class="base">
        <div class="car m">
-    <img src="./../assets/logo.png" style="width:100%;">
+    <img src="./../assets/logo.png" style="width:100%;" alt="fmcweekend iitbhu logo">
 
-    <i class="fa fa-facebook" aria-hidden="true"></i>
-    <i class="fa fa-instagram" aria-hidden="true"></i>
-    <i class="fa fa-linkedin" aria-hidden="true"></i>
-    <i class="fa fa-youtube-play" aria-hidden="true"></i>
+    <a class="fa fa-facebook" aria-hidden="true" href="https://www.instagram.com/fmc_weekend/"></a>
+    <a class="fa fa-instagram" aria-hidden="true" href="https://www.facebook.com/fmcweekendiitbhu"></a>
+    <a class="fa fa-linkedin" aria-hidden="true" href="https://www.linkedin.com/company/fmc-weekend-creative/" ></a>
+    <a class="fa fa-youtube-play" aria-hidden="true" href="https://www.youtube.com/channel/UCt4-7kmQaPEZzPLil4RNRCw"></a>
 
   </div>
   <div class="car">
-    <div class="title">Conatcts</div>
+    <div class="title">Contacts</div>
     <br>
     <div class="title4">Shikhar Choudhary</div>
     <div class="title4">97613 27327</div>
     <br><br>
     <div class="title4">Gaurav Verma</div>
     <div class="title4">70911 40432</div>
-  </div>
+  </div> 
 </div>
   </div>
-<div class="line"></div>
   <div class="base2">
   <div class="car2" (click)="pop_up('tac')">
     <div class="title3">Terms and conditions</div>

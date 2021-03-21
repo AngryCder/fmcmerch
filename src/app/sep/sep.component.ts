@@ -27,7 +27,9 @@ export class SepComponent implements OnInit,AfterViewInit {
      this.orders = this.storage.retrieve('orders');
      console.log(this.orders)
     for(let siz of this.sizes){
-      this.dataSource.push({size:siz,black:this.orders['dark'][siz],white:this.orders['white'][siz]});
+      if(this.orders['dark'][siz]!=0 || this.orders['white'][siz]!=0){
+        this.dataSource.push({size:siz,black:this.orders['dark'][siz],white:this.orders['white'][siz]});
+      }
     }
     console.log(this.dataSource);
    }

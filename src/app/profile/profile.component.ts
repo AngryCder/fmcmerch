@@ -75,7 +75,7 @@ export class ProfileComponent implements OnInit {
   }
 
   buy():void{
-    this.http.post("https://fmc-weekend-shirt.herokuapp.com/checkout-tshirt",{"order":this.storage.retrieve('orders'),"detail":this.detail}, {withCredentials:true}).subscribe((res:any)=>{
+    this.http.post("https://fmcw.vercel.app/checkout-tshirt",{"order":this.storage.retrieve('orders'),"detail":this.detail}, {withCredentials:true}).subscribe((res:any)=>{
       console.log(res);
     let  a :any = new Razorpay({
     "key": "rzp_test_BZmqKg2c3vGbFd", // Enter the Key ID generated from the Dashboard

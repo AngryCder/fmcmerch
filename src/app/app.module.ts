@@ -6,7 +6,6 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { ProfileComponent } from './profile/profile.component';
 import { SepComponent } from './sep/sep.component';
-import { AepComponent } from './aep/aep.component';
 import { FaqComponent } from './faq/faq.component';
 import { AppRoutingModule } from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
@@ -26,7 +25,6 @@ import {NgxWebstorageModule} from 'ngx-webstorage';
     AppComponent,
     ProfileComponent,
     SepComponent,
-    AepComponent,
     FaqComponent
   ],
   imports: [

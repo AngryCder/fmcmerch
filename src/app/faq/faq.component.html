@@ -1,6 +1,7 @@
 <div class="box" *ngIf="data == 'faq'">
+	<div class="title">FAQs for the T-shirts</div>
 	<p> 
-	FAQs for the T-shirts : <br><br>
+<br>
 
 Q)How much do I pay for shipping? <br>
 Ans - There will be no shipping charges. The delivery is free across PAN India.  <br><br>
@@ -42,9 +43,8 @@ Ans - You can purchase any number of t-shirts you like. <br><br>
 
 
 <div class="box" *ngIf="data == 'pp'">
-	<p><br>
-	<br>PRIVACY POLICY <br><br>
-
+	<div class="title">PRIVACY POLICY</div>
+	<p>
 <br><br>SECTION 1 - WHAT DO WE DO WITH YOUR INFORMATION?<br><br>
 
 When you purchase something from our website, as part of the buying and selling process, we collect the personal information you give us such as your name, address and email address. When you browse our site, we also automatically receive your computer’s internet protocol (IP) address in order to provide us with information that helps us learn about your browser and operating system. With your permission, we may send you emails about our fest and other updates.
@@ -90,9 +90,8 @@ If you would like to: access, correct, amend or delete any personal information 
 </div>
 
 <div class="box" *ngIf="data == 'tac'">
+	<div class="title">TERMS AND CONDITIONS </div>
 	<p>
-		<br><br>
-TERMS AND CONDITIONS 
 <br><br>
 This website is operated by Film and Media Council IIT(BHU). Throughout the site, the terms “we”, “us” and “our” refer to FMC Weekend. FMC Weekend offers this website, including all information, tools and services available from this site to you, the user, conditioned upon your acceptance of all terms, conditions, policies and notices stated here.
 <br><br>
@@ -187,9 +186,53 @@ Questions about the Terms of Service should be sent to us at fmcweekendiitbhu@gm
 </div>
 
 <div class="box" *ngIf="data == 'ref'">
-	<p>Refund Policy<br><br>
+	<div class="title">Refund Policy</div>
+	<p><br><br>
 
-		To be eligible for a return, your item must delivered in mishaped condition.
-		The shipping fees will be borne by the Company
+1.Products are returnable within the applicable return window if you’ve received them in a condition that is physically damaged.<br><br>
+2.For damaged/ defective items, a replacement will be issued which will be delivered in a number of days. The return request has to be placed on the website.<br><br>
+3. The replacement will be initiated after the originally delivered item is picked up.<br><br>
+4.Once you raise a request, you'll get an email and SMS confirming that your request is being processed. Based on the item, your request may be automatically approved or you may be contacted for more details. If the request is approved, the item will be picked up after which you will get a replacement.<br><br>
+5. We may contact you to ascertain the damage or defect in the product prior to issuing replacement.<br><br>
+
+The decision of the fest team shall be final and binding.<br><br>
 	</p>
+</div>
+
+<div class="box" *ngIf="data == 'open'">
+	<p>The Purchaces of FMC Weekend Merchandise is only for the students of IIT(BHU).To buy please login</p>
+	  <button mat-raised-button color="warn" mat-dialog-close style="
+    position: relative;
+    float: right;
+">Close</button>
+</div>
+<div class="ta" *ngIf="data == 'table'">
+	<img src="./../../assets/guide.jpg" style="width:300px;height: 344px;">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="size">
+    <th mat-header-cell *matHeaderCellDef> Size </th>
+    <td mat-cell *matCellDef="let element"> {{ element.size }} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="chest">
+    <th mat-header-cell *matHeaderCellDef> Chest </th>
+    <td mat-cell *matCellDef="let element"> {{ element.chest }} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="length">
+    <th mat-header-cell *matHeaderCellDef> Length</th>
+    <td mat-cell *matCellDef="let element"> {{ element.length }} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
 </div>

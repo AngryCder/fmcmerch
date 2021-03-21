@@ -4,11 +4,11 @@ import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-logi
 import {LocalStorageService} from 'ngx-webstorage'
 import { MatDialog } from '@angular/material/dialog';
 import {SepComponent} from './sep/sep.component';
-import {AepComponent} from './aep/aep.component';
 import { FaqComponent } from './faq/faq.component';
 import { ProfileComponent } from './profile/profile.component';
 import {HttpClient} from '@angular/common/http';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { Title, Meta } from '@angular/platform-browser';
 declare var Razorpay:any;
 
 interface sizes{
@@ -58,7 +58,9 @@ export class AppComponent {
 		private authService: SocialAuthService,
 		private storage:LocalStorageService,
 		public dialog:MatDialog,
-		private http:HttpClient){
+		private http:HttpClient,
+		private titleService: Title, 
+		private metaService: Meta){
 	  this.user = this.storage.retrieve('user');
       this.loggedIn=(this.user != null);
 
@@ -90,6 +92,12 @@ this.storage.store("no",0);
       }
 	}
 	ngOnInit():void{
+    this.titleService.setTitle("FMC Weekend Merchandise");
+    this.metaService.addTags([
+      {name: 'keywords', content: 'FMC, Weekend, Merchandise,FMC Weekend,tshirt,T-Shirt,t-shirt,FMC Weekend Merchandise'},
+      {name: 'description', content: 'FMC Weekend Merchandise website for selling t-shirts'},
+      {name: 'viewport', content: 'width=device-width, initial-scale=1'}
+    ]);
  this.ord = this.storage.retrieve('orders');
    this.cartbadge = this.storage.retrieve('no');
    	this.total();
@@ -104,18 +112,15 @@ this.storage.store("no",0);
                      console.log('The T&C was closed');
                      this.dialog.closeAll();
                              });	}
+
 	pop_notice():void{
-		const dialogRef = this.dialog.open(AepComponent,{width:'90%',height:"90%",maxWidth:"600px"});
-		dialogRef.afterClosed().subscribe(result => {
-                     console.log('The notice was closed');
-                     this.dialog.closeAll();
-                             });
+		this.pop_up("open");
 		setTimeout(() => {  this.dialog.closeAll() }, 8000);
 	}
 	login():void{
 		 this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
 		 this.log_sub = this.authService.authState.subscribe((user:any)=>{
-		 	this.http.post("https://fmc-weekend-shirt.herokuapp.com/google/login",{"token":user.idToken} ,{withCredentials:true}).subscribe((res)=>{
+		 	this.http.post("https://fmcw.vercel.app/google/login",{"token":user.idToken} ,{withCredentials:true}).subscribe((res)=>{
 		 		console.log(res);
 		 		if(res["message"] == "ni"){
 		 			this.openSnackBar("Please use institue Email ID","hide");
@@ -127,7 +132,6 @@ this.storage.store("no",0);
 		 			this.storage.store("user",user);
 		 		}
 		 	});
-		 	this.storage.store("user",user);
 		 });
 
 	}
@@ -138,7 +142,7 @@ this.storage.store("no",0);
 		this.storage.clear("orders");
 		this.storage.clear("no");
 		this.log_sub.unsubscribe();
-		this.http.get("https://fmc-weekend-shirt.herokuapp.com/google/logout",{withCredentials:true}).subscribe((res)=>{console.log(res)});
+		this.http.get("https://fmcw.vercel.app/google/logout",{withCredentials:true}).subscribe((res)=>{console.log(res)});
 		window.location.reload();
 	}
 
