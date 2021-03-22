@@ -19,7 +19,7 @@ export class SepComponent implements OnInit,AfterViewInit {
 
   dataSource:tb[] = [];
 
-  sizes:string[]=["xs","s","m","l","xl","xxl","xxxl"];
+  sizes:string[]=["s","m","l","xl","xxl","xxxl"];
 
   orders:any;
 

@@ -20,7 +20,6 @@ interface details {
   year:number;
 }
 interface sizes{
-  xs:number;
   s:number;
   m:number;
   l:number;

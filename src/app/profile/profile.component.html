@@ -94,7 +94,7 @@
   </mat-form-field>
 
   <button mat-raised-button color="primary" (click)="buy()" [disabled]="(phone.value.length != 10) || (postalCode.value.length != 6) || (!district.value) || (!state.value) || (!address.value) || (!year.value)|| (!city.value) || (!rollno.value)">submit</button>
-  <button mat-raised-button color="warn" mat-dialog-close (click)="buy()"  style="
+  <button mat-raised-button color="warn" mat-dialog-close  style="
     position: relative;
     float: right;
 ">Close</button>

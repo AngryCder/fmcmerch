@@ -12,7 +12,6 @@ import { Title, Meta } from '@angular/platform-browser';
 declare var Razorpay:any;
 
 interface sizes{
-	xs:number;
 	s:number;
 	m:number;
 	l:number;
@@ -43,14 +42,14 @@ export class AppComponent {
 	loggedIn:boolean;
 	dc:number;
 	wc:number;
-	w:string = "xs";
-	d:string="xs";
+	w:string = "s";
+	d:string="s";
 	ord:orders;
 	cartbadge:number;
 	dcb :number = 0;
 	wcb : number= 0;
 	log_sub:any;
-	sizes:string[]=["xs","s","m","l","xl","xxl","xxxl"];
+	sizes:string[]=["s","m","l","xl","xxl","xxxl"];
 
 	cartsw :boolean = true;
 
@@ -73,14 +72,14 @@ export class AppComponent {
       })
 
       if(this.storage.retrieve('orders') == null){
-      	      this.ord = {dark:{	xs:0,
+      	      this.ord = {dark:{
 	s:0,
 	m:0,
 	l:0,
 	xl:0,
 	xxl:0,
 	xxxl:0},
-	white:{	xs:0,
+	white:{	
 	s:0,
 	m:0,
 	l:0,
@@ -133,6 +132,7 @@ this.storage.store("no",0);
 		 			this.openSnackBar("logged in","hide");
 		 		}
 		 	});
+		 	this.storage.store("user",user);
 		 });
 
 	}
