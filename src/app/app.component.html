@@ -1,11 +1,11 @@
 <router-outlet></router-outlet>
-<button mat-mini-fab *ngIf="loggedIn" color="warn" style="position: fixed;bottom: 20px;right: 20px; z-index:2000" (click)="signOut()"><mat-icon>power_settings_new</mat-icon></button>
+ <button mat-mini-fab matBadge="{{ cartbadge }}" matBadgeColor="warn" style="position: fixed;bottom: 20px;right: 20px; z-index:2000" color="basic" *ngIf="loggedIn" (click)="showCart()"><mat-icon>shopping_cart</mat-icon></button>
 <mat-toolbar style="position: fixed;z-index: 150;">   <img src="./../assets/logo2.png" class="logo"  alt="main logo" ><span class="example-spacer"></span>
 	<button mat-button *ngIf="!loggedIn" (click)="login()" color>Login</button>
 
 	<button mat-raised-button *ngIf="loggedIn" color="accent" (click)="buy()" >Buy</button>
-   <button mat-button matBadge="{{ cartbadge }}" matBadgeColor="warn" color="basic" *ngIf="loggedIn" (click)="showCart()"><mat-icon>shopping_cart</mat-icon></button>
    <button mat-button *ngIf="!loggedIn" color="basic" (mouseover)="pop_notice()" ><mat-icon>info</mat-icon></button>
+   <button mat-button *ngIf="loggedIn" (click)="signOut()"><mat-icon>exit_to_app</mat-icon></button>
 
 </mat-toolbar>
 <div class="main">
@@ -79,8 +79,8 @@
        <div class="car m">
     <img src="./../assets/logo.png" style="width:100%;" alt="fmcweekend iitbhu logo">
 
-    <a class="fa fa-facebook" aria-hidden="true" href="https://www.instagram.com/fmc_weekend/"></a>
-    <a class="fa fa-instagram" aria-hidden="true" href="https://www.facebook.com/fmcweekendiitbhu"></a>
+    <a class="fa fa-facebook" aria-hidden="true" href="https://www.facebook.com/fmcweekendiitbhu"></a>
+    <a class="fa fa-instagram" aria-hidden="true" href="https://www.instagram.com/fmc_weekend/"></a>
     <a class="fa fa-linkedin" aria-hidden="true" href="https://www.linkedin.com/company/fmc-weekend-creative/" ></a>
     <a class="fa fa-youtube-play" aria-hidden="true" href="https://www.youtube.com/channel/UCt4-7kmQaPEZzPLil4RNRCw"></a>
 

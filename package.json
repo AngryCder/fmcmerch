@@ -34,7 +34,6 @@
     "domino": "^2.1.6",
     "express": "^4.15.2",
     "ngx-webstorage": "^7.0.1",
-    "paytm-blink-checkout-angular": "0.0.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "utf-8-validate": "^5.0.4",

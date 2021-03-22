@@ -3,7 +3,6 @@ import { DOCUMENT } from '@angular/common';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpClient} from '@angular/common/http';
 import {LocalStorageService} from 'ngx-webstorage';
-import { CheckoutService } from 'paytm-blink-checkout-angular';
 import { Subscription } from 'rxjs';
 import { DomSanitizer , SafeHtml} from '@angular/platform-browser';
 
@@ -64,7 +63,7 @@ export class ProfileComponent implements OnInit {
 
   user:any = this.storage.retrieve('user');
   constructor(@Inject(DOCUMENT) private document: Document,private _snackBar: MatSnackBar,private http:HttpClient,private storage:LocalStorageService
-    ,private sanitizer:DomSanitizer,private readonly  checkoutService: CheckoutService) { }
+    ,private sanitizer:DomSanitizer) { }
 
   ngOnInit(): void {
 

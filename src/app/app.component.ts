@@ -130,9 +130,9 @@ this.storage.store("no",0);
 		 		}
 		 		else if(res["message"] == "success"){
 		 			this.storage.store("user",user);
+		 			this.openSnackBar("logged in","hide");
 		 		}
 		 	});
-		 	this.storage.store("user",user);
 		 });
 
 	}
