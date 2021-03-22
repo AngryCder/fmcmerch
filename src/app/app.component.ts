@@ -132,7 +132,7 @@ this.storage.store("no",0);
 		 			this.openSnackBar("logged in","hide");
 		 		}
 		 	});
-		 	this.storage.store("user",user);
+		 	//this.storage.store("user",user);
 		 });
 
 	}
