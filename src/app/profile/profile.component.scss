@@ -18,11 +18,15 @@ td {
     height: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
     background: white;
     overflow: scroll;
     border-radius:25px;
     }
+
+.details::-webkit-scrollbar {
+  display: none;
+}
+
 
 ::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
     background-color: whitesmoke;
