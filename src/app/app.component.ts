@@ -130,8 +130,9 @@ this.storage.store("no",0);
 		else{
 		this.http.post("https://fmcw.vercel.app/checkout-order",this.storage.retrieve("orders"),{withCredentials:true}).
 		subscribe((res:any)=>{
+			console.log(res);
 			if(res["message"]=="success"){
-				const dialogRef = this.dialog.open(FileComponent,{width:'90%',height:"90%",maxWidth:"700px"});
+				const dialogRef = this.dialog.open(FileComponent,{data:{amount:res["amount"],size:res["size"],quantity:res["quantity"]},width:'90%',height:"90%",maxWidth:"700px"});
 		dialogRef.afterClosed().subscribe(result => {
                      console.log('file');
                      this.dialog.closeAll();

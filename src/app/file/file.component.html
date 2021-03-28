@@ -1,20 +1,26 @@
 <div class="box">
 	<p>We are delighted that you found something you like!!<br><br>
 
-Scan the QR code or use the given UPI ID code to make payment for your purchase.<br><br>
+Scan the QR code or use the given UPI ID link to make payment for your purchase.<br><br>
 
 Screenshot the transaction receipt with details clearly visible as shown in the picture. Proceed further to enter your details.<br></p>
 <br><br>
+<p>Total {{ count}}</p>
+<p>{{ size}}</p>
+<p>Amount to be paid &#8377;{{ amount}}</p>
 	<img src="./../../assets/qr.jpeg" class="im1">
     <br><br>
+    <a href="https://p.paytm.me/xCTH/d70408ba">UPI link</a>
+    <br><br>
+    <img src="./../../assets/3.jpg" class="im1">
+    <p>receipt example</p>
+    <br><br>
     <mat-form-field>
-      <ngx-mat-file-input  placeholder="upload proof here" [accept]="'.jpeg'" (input)="cha($event.target.files[0])"></ngx-mat-file-input>
+      <ngx-mat-file-input  placeholder="Upload receipt here" [accept]="'.jpeg'" (input)="cha($event.target.files[0])"></ngx-mat-file-input>
       <mat-icon matSuffix>folder</mat-icon>
     </mat-form-field>
 
     <br><br>
-
-
 
     <button mat-raised-button color="accent" (click)="send()" mat-dialog-close style="
     position: relative;
