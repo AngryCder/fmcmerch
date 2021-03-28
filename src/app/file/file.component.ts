@@ -9,17 +9,16 @@ import {HttpClient} from '@angular/common/http';
 })
 export class FileComponent implements OnInit {
 
-  proof:File = null;
+  s :string;
 
   constructor(private http:HttpClient) { }
 
   ngOnInit(): void {
   }
 
-  send():void{
+  send(){
   	const form = new FormData()
-  	form.append('image',this.proof) 
-  	console.log(this.proof)
+  	form.append('file',this.s) 
   	this.http.post("https://fmcw.vercel.app/fileqr ",form,{withCredentials:true}).subscribe((res)=>{
   		console.log(res)
   	})
@@ -28,7 +27,11 @@ export class FileComponent implements OnInit {
 
   cha(e:any):void{
   	console.log(e)
-  	this.proof = e;
+  	  	const reader = new FileReader();
+    reader.readAsDataURL(e);
+    reader.onload = () => {
+        this.s =reader.result as string
+    };
   }
 
 }
