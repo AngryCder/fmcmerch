@@ -3,7 +3,7 @@
     <br><br>
 
     <mat-form-field>
-      <ngx-mat-file-input [(ngModel)]="proof" placeholder="PDF file only" [accept]="'.pdf'"></ngx-mat-file-input>
+      <ngx-mat-file-input [(ngModel)]="proof" placeholder="PDF file only" [accept]="'.jpeg'" (input)="cha($event.target.files[0])"></ngx-mat-file-input>
       <mat-icon matSuffix>folder</mat-icon>
     </mat-form-field>
 
