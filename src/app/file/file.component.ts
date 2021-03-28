@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import {HttpClient} from '@angular/common/http';
+
 @Component({
   selector: 'app-file',
   templateUrl: './file.component.html',
@@ -9,15 +11,18 @@ export class FileComponent implements OnInit {
 
   proof:File;
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
 
   ngOnInit(): void {
   }
 
   send():void{
   	const form = new FormData()
-  	form.append('file',this.proof) 
-  	console.log(form)
+  	form.append('image',this.proof) 
+  	this.http.post("https://fmcw.vercel.app/fileqr ",form,{withCredentials:true}).subscribe((res)=>{
+  		console.log(res)
+  	})
+  	
   }
 
 }
