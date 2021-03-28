@@ -9,10 +9,12 @@ import { SepComponent } from './sep/sep.component';
 import { FaqComponent } from './faq/faq.component';
 import { AppRoutingModule } from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
+import { FileComponent } from './file/file.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 
 
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { MaterialFileInputModule } from 'ngx-material-file-input'
 import {
   GoogleLoginProvider,
   FacebookLoginProvider
@@ -26,7 +28,8 @@ import {NgxWebstorageModule} from 'ngx-webstorage';
     AppComponent,
     ProfileComponent,
     SepComponent,
-    FaqComponent
+    FaqComponent,
+    FileComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -37,6 +40,7 @@ import {NgxWebstorageModule} from 'ngx-webstorage';
     ReactiveFormsModule,
     MaterialModule,
     FormsModule,
+    MaterialFileInputModule,
     AppRoutingModule
   ],
    providers: [{

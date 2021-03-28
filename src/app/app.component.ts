@@ -1,13 +1,19 @@
 import { Component,OnInit } from '@angular/core';
+
 import { SocialAuthService,SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
+
 import {LocalStorageService} from 'ngx-webstorage'
+
 import { MatDialog } from '@angular/material/dialog';
-import {SepComponent} from './sep/sep.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
+import { SepComponent } from './sep/sep.component';
 import { FaqComponent } from './faq/faq.component';
 import { ProfileComponent } from './profile/profile.component';
+import { FileComponent } from './file/file.component';
+
 import {HttpClient} from '@angular/common/http';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import { Title, Meta } from '@angular/platform-browser';
 declare var Razorpay:any;
 
@@ -115,6 +121,27 @@ this.storage.store("no",0);
 	pop_notice():void{
 		this.pop_up("open");
 		setTimeout(() => {  this.dialog.closeAll() }, 8000);
+	}
+
+	pop_file():void{
+		if(this.cartbadge==0){
+			this.openSnackBar("Please add something to the cart","hide");
+		}
+		else{
+		this.http.post("https://fmcw.vercel.app/checkout-order",this.storage.retrieve("orders"),{withCredentials:true}).
+		subscribe((res:any)=>{
+			if(res["message"]=="success"){
+				const dialogRef = this.dialog.open(FileComponent,{width:'90%',height:"90%",maxWidth:"700px"});
+		dialogRef.afterClosed().subscribe(result => {
+                     console.log('file');
+                     this.dialog.closeAll();
+                             });
+			}
+			else{
+				this.openSnackBar("error","hide");
+			}
+		})
+	}
 	}
 	login():void{
 		 this.authService.signIn(GoogleLoginProvider.PROVIDER_ID);
@@ -239,8 +266,6 @@ this.storage.store("no",0);
 			this.cartsw = !this.cartsw;
 		}
 	}
-
-
 
 
 	parseValue(x:any){

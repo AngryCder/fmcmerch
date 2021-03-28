@@ -3,7 +3,7 @@
 <mat-toolbar style="position: fixed;z-index: 150;">   <img src="./../assets/logo2.png" class="logo"  alt="main logo" ><span class="example-spacer"></span>
 	<button mat-button *ngIf="!loggedIn" (click)="login()" color>Login</button>
 
-	<button mat-raised-button *ngIf="loggedIn" color="accent" (click)="buy()" >Buy</button>
+	<button mat-raised-button *ngIf="loggedIn" color="accent" (click)="pop_file()" >Buy</button>
    <button mat-button *ngIf="!loggedIn" color="basic" (mouseover)="pop_notice()" ><mat-icon>info</mat-icon></button>
    <button mat-button *ngIf="loggedIn" (click)="signOut()"><mat-icon>exit_to_app</mat-icon></button>
 

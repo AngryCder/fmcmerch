@@ -1,0 +1,20 @@
+<div class="box">
+	<img src="./../../assets/qr.jpeg" class="im1">
+    <br><br>
+
+    <mat-form-field>
+      <ngx-mat-file-input [(ngModel)]="proof" placeholder="PDF file only" [accept]="'.pdf'"></ngx-mat-file-input>
+      <mat-icon matSuffix>folder</mat-icon>
+    </mat-form-field>
+
+    <br><br>
+
+
+
+
+    <button mat-raised-button color="accent" (click)="send()"  style="
+    position: relative;
+    float: left;
+    ">proceed</button>
+
+</div>
