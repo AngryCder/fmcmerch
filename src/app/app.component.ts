@@ -10,7 +10,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 
 import { SepComponent } from './sep/sep.component';
 import { FaqComponent } from './faq/faq.component';
-import { ProfileComponent } from './profile/profile.component';
+//import { ProfileComponent } from './profile/profile.component';
 import { FileComponent } from './file/file.component';
 
 import {HttpClient} from '@angular/common/http';
@@ -229,7 +229,7 @@ this.storage.store("no",0);
 			this.openSnackBar("Please add something to the cart","hide");
 		}
 		else{
-		const dialogRef = this.dialog.open(ProfileComponent,{width:'100%',height:"100%",maxWidth:"600px"});
+		//const dialogRef = this.dialog.open(ProfileComponent,{width:'100%',height:"100%",maxWidth:"600px"});
             }
 	}
 
