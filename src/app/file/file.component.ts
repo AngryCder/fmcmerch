@@ -15,6 +15,8 @@ export class FileComponent implements OnInit {
 
   s :string;
 
+  b:boolean =true;
+
   count:number;
   amount : number;
   size:string;
@@ -57,6 +59,7 @@ export class FileComponent implements OnInit {
     reader.onload = () => {
         this.s =reader.result as string
     };
+    this.b = false;
   }
 
 }
