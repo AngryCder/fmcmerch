@@ -15,16 +15,9 @@ Screenshot the transaction receipt with details clearly visible as shown in the 
     <img src="./../../assets/1.jpg" class="im1">
     <p>Paytm receipt example</p>
     <br><br>
-    <mat-form-field>
-      <ngx-mat-file-input #matfile  placeholder="Upload receipt here" [accept]="'.jpeg'" (input)="cha($event.target.files[0])"></ngx-mat-file-input >
-      <mat-icon matSuffix>folder</mat-icon>
-    </mat-form-field>
-
-    <br><br>
-
     <button mat-raised-button color="accent" (click)="send()" mat-dialog-close style="
     position: relative;
     float: left;
-    " [disabled]="!(matfile.value)">Proceed</button>
+    " >Proceed</button>
 
 </div>
