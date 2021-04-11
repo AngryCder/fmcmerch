@@ -1,7 +1,6 @@
 <router-outlet></router-outlet>
  <button mat-mini-fab matBadge="{{ cartbadge }}" matBadgeColor="warn" style="position: fixed;bottom: 20px;right: 20px; z-index:2000" color="basic" *ngIf="loggedIn" (click)="showCart()"><mat-icon>shopping_cart</mat-icon></button>
 <mat-toolbar style="position: fixed;z-index: 150;">   <img src="./../assets/logo2.png" class="logo"  alt="main logo" ><span class="example-spacer"></span>
-	<button mat-button *ngIf="!loggedIn" (click)="login()" color>Login</button>
 
 	<button mat-raised-button *ngIf="loggedIn" color="accent" (click)="pop_file()" >Buy</button>
    <button mat-button *ngIf="!loggedIn" color="basic" (mouseover)="pop_notice()" ><mat-icon>info</mat-icon></button>

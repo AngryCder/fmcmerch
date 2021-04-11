@@ -15,7 +15,7 @@ import { FileComponent } from './file/file.component';
 
 import {HttpClient} from '@angular/common/http';
 import { Title, Meta } from '@angular/platform-browser';
-declare var Razorpay:any;
+
 
 interface sizes{
 	s:number;
